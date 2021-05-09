@@ -1,0 +1,31 @@
+#stock visualization
+import investpy as inst
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+stocks_df = inst.get_stocks(country='INDIA')
+
+stocks_list = inst.get_stocks_list(country='INDIA')
+
+df = inst.get_stock_historical_data(stock='BHEL',
+                                    country='india',
+                                    from_date='01/01/2010',
+                                    to_date='31/12/2020',
+                                    as_json=False,
+                                    order='ascending')
+
+df=df.filter(['Date','Close'])
+
+
+df=df.reset_index()
+
+plt.figure(figsize=(15,15))
+x=df['Date']
+y=df['Close']
+plt.plot(x,y)
+plt.title('Stock Visual')
+plt.xlabel('Year')
+plt.ylabel('Close Value')
+plt.show()
